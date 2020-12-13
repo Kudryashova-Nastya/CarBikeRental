@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'CarBikeRental.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'std_953',
+        'HOST': 'std-mysql',
+        'PORT': '3306',
+        'USER': 'std_953',
+        'PASSWORD': '12345678'
     }
 }
 
