@@ -1,9 +1,9 @@
 from django.db import models
 
-from Car.models import Location
-from Car.models import User
-from Car.models import Deliveryman
-from Car.models import Delivery
+from General.models import Location
+from General.models import User
+from General.models import Deliveryman
+from General.models import Delivery
 
 # Create your models here.
 
