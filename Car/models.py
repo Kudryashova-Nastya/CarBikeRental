@@ -15,11 +15,13 @@ class Car_model(models.Model):
     engine = models.CharField(max_length=10)
     doors = models.PositiveSmallIntegerField()
     rudder = models.CharField(max_length=6)
+    def __str__(self):
+        return self.name or ''
 
 
 class Car(models.Model):
     brand = models.CharField(max_length=100)
-    car_model_id = models.ForeignKey(Car_model, on_delete=models.CASCADE)
+    car_model_id_link = models.ForeignKey(Car_model, on_delete=models.CASCADE)
     price = models.PositiveSmallIntegerField()
     year = models.PositiveSmallIntegerField()
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE)
@@ -31,6 +33,8 @@ class Car(models.Model):
     number = models.CharField(max_length=10)
     photo = models.CharField(max_length=100)
     status = models.CharField(max_length=20)
+    def __str__(self):
+        return self.number or ''
 
 
 class Car_rent(models.Model):
@@ -45,3 +49,5 @@ class Car_rent(models.Model):
     limit = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     comment = models.CharField(max_length=200, blank=True)
+    def __str__(self):
+        return str(self.car_id) or ''

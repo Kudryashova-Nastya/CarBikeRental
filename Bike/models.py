@@ -18,6 +18,8 @@ class Bike_model(models.Model):
     seat = models.CharField(max_length=100)
     footrest = models.CharField(max_length=50, blank=True)
     weight = models.FloatField()
+    def __str__(self):
+        return self.name
 
 
 class Bike(models.Model):
@@ -29,6 +31,8 @@ class Bike(models.Model):
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE)
     photo = models.CharField(max_length=100)
     status = models.CharField(max_length=20)
+    def __str__(self):
+        return str(self.bike_model_id)
 
 
 class Bike_rent(models.Model):
@@ -43,3 +47,5 @@ class Bike_rent(models.Model):
     limit = models.PositiveIntegerField()
     price = models.PositiveIntegerField()
     comment = models.CharField(max_length=200, blank=True)
+    def __str__(self):
+        return str(self.bike_id)
