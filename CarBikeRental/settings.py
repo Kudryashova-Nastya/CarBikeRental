@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Bike',
     'General',
     'rest_framework',
+    'import_export',
 ]
 
 MIDDLEWARE = [

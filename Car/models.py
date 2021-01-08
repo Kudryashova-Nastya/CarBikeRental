@@ -21,7 +21,7 @@ class Car_model(models.Model):
 
 class Car(models.Model):
     brand = models.CharField(max_length=100)
-    car_model_id_link = models.ForeignKey(Car_model, on_delete=models.CASCADE)
+    car_model_id = models.ForeignKey(Car_model, on_delete=models.CASCADE)
     price = models.PositiveSmallIntegerField()
     year = models.PositiveSmallIntegerField()
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE)

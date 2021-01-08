@@ -6,27 +6,32 @@ from django.utils.html import format_html
 from django.urls import reverse
 from django.utils.http import urlencode
 from django.utils.safestring import mark_safe 
+
 # Register your models here.
 
-class Car_modelAdmin(admin.ModelAdmin):
+# import and export via admin action
+
+from import_export.admin import ImportExportActionModelAdmin
+
+class Car_modelAdmin(ImportExportActionModelAdmin):
     list_display = ('id', 'name', 'gearbox', 'body', 'seats', 'drive', 'engine', 'doors', 'rudder')
     list_filter = ('gearbox', 'body', 'engine', 'seats', 'drive', 'doors', 'rudder')
     search_fields = ('id', 'name')
 
-class CarAdmin(admin.ModelAdmin):
-    list_display =('id', 'brand', 'car_model_id_link', 'price', 'year', 'location_id', 'max_limit', 'mileage', 'color', 'number', 'status')
+class CarAdmin(ImportExportActionModelAdmin):
+    list_display =('id', 'brand', 'car_model_id', 'price', 'year', 'location_id', 'max_limit', 'mileage', 'color', 'number', 'status')
     list_filter = ('price', 'year', 'max_limit', 'brand', 'status', 'color')
     search_fields = ('id', 'number', 'year', 'brand')
     list_editable = ('status',)
    
-    def car_model_id_link(self, obj):
+    def car_model_id(self, obj):
         url = (
             reverse("admin:car_car_model_changelist")
             # + "?"
-            # + urlencode({"courses__id": f"{obj.id}"})
+            # + urlencode({"car_model__id": f"{obj.id}"})
         )
         return format_html('<a href="{}">Students</a>', url)
-    car_model_id_link.short_description = "car_model"
+    car_model_id.short_description = "car_model"
     
     # def car_model_id(self, item):
         #     url = resolve_url(admin_urlname(models.Car._meta, 'change'), item.bar.id)
@@ -49,7 +54,7 @@ class CarAdmin(admin.ModelAdmin):
     #     url = resolve_url(admin_urlname(models.Bar._meta, 'change'), item.bar.id)
     #     return format_html('<a href="{url}">{name}</a>'.format(url=url, name=str(item.bar)))
 
-class Car_rentAdmin(admin.ModelAdmin):
+class Car_rentAdmin(ImportExportActionModelAdmin):
     list_display = ('id', 'user_id', 'car_id', 'status', 'start', 'end', 'region', 'delivery_to_id', 'delivery_from_id', 'limit', 'price')
     list_filter = ('status', 'start', 'end', 'region', 'limit')
     search_fields = ('id', 'start', 'end', 'region','limit', 'price', 'comment')
