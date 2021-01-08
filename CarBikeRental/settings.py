@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'Car',
     'Bike',
     'General',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -84,6 +85,12 @@ DATABASES = {
         'PORT': '3306',
         'USER': 'std_953',
         'PASSWORD': '12345678'
+        # 'ENGINE': 'django.db.backends.mysql',
+        # 'NAME': 'carbikerental',
+        # 'HOST': '127.0.0.1',
+        # 'PORT': '',
+        # 'USER': 'root',
+        # 'PASSWORD': ''
     }
 }
 
