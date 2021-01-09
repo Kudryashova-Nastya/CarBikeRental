@@ -13,16 +13,23 @@ from django.utils.safestring import mark_safe
 
 from import_export.admin import ImportExportActionModelAdmin
 
+def send_for_repair(modeladmin, request, queryset):
+    queryset.update(status='ре')
+send_for_repair.short_description = "Change the status of cars to 'repair'"
+
 class Car_modelAdmin(ImportExportActionModelAdmin):
     list_display = ('id', 'name', 'gearbox', 'body', 'seats', 'drive', 'engine', 'doors', 'rudder')
     list_filter = ('gearbox', 'body', 'engine', 'seats', 'drive', 'doors', 'rudder')
     search_fields = ('id', 'name')
+    # from_encoding = 'cp1251'
+    # to_encoding = 'cp1251'
 
 class CarAdmin(ImportExportActionModelAdmin):
     list_display =('id', 'brand', 'car_model_id', 'price', 'year', 'location_id', 'max_limit', 'mileage', 'color', 'number', 'status')
     list_filter = ('price', 'year', 'max_limit', 'brand', 'status', 'color')
     search_fields = ('id', 'number', 'year', 'brand')
     list_editable = ('status',)
+    actions = [send_for_repair, 'export_admin_action']
    
     def car_model_id(self, obj):
         url = (

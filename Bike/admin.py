@@ -6,6 +6,11 @@ from .models import Bike_model, Bike, Bike_rent
 # import and export via admin action
 
 from import_export.admin import ImportExportActionModelAdmin
+
+def send_for_repair(modeladmin, request, queryset):
+    queryset.update(status='ре')
+send_for_repair.short_description = "Change the status of bikes to 'repair'"
+
 class Bike_modelAdmin(ImportExportActionModelAdmin):
     list_display = ('id', 'name', 'type_bike', 'wheel_size', 'speeds', 'frame', 'brakes', 'seat', 'rudder', 'footrest', 'weight')
     list_filter = ('type_bike', 'wheel_size', 'speeds', 'frame', 'brakes', 'seat')
@@ -16,6 +21,7 @@ class BikeAdmin(ImportExportActionModelAdmin):
     list_filter = ('price', 'year', 'brand', 'status', 'color')
     search_fields = ('id', 'year', 'brand')
     list_editable = ('status',)
+    actions = [send_for_repair, 'export_admin_action']
 
 class Bike_rentAdmin(ImportExportActionModelAdmin):
     list_display = ('id', 'user_id', 'bike_id', 'status', 'start', 'end', 'region', 'delivery_to_id', 'delivery_from_id', 'limit', 'price')

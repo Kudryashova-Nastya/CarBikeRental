@@ -38,4 +38,4 @@ class Delivery(models.Model):
     time = models.DateTimeField()
     price = models.PositiveSmallIntegerField()
     def __str__(self):
-        return self.delivery_location
+        return str(self.id)

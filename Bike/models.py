@@ -7,6 +7,23 @@ from General.models import Delivery
 
 # Create your models here.
 
+STATUS_RENT_CHOICES = [
+    ('за', 'Заказано'),
+    ('оп', 'Оплачено'),
+    ('во', 'Возврат средств'),
+    ('дз', 'На доставке заказчику'),
+    ('ак', 'Активно'),
+    ('дл', 'На доставке в локацию'),
+    ('вы', 'Выполнено'),
+    ('от', 'Отменено'),
+    ('шт', 'Ожидание оплаты штрафа')
+]
+
+STATUS_BIKE_CHOICES = [
+    ('ре', 'В ремонте'),
+    ('св', 'Свободен'),
+    ('ар', 'Арендован')
+]
 class Bike_model(models.Model):
     name = models.CharField(max_length=100)
     type_bike = models.CharField(max_length=15)
@@ -30,7 +47,7 @@ class Bike(models.Model):
     year = models.PositiveSmallIntegerField()
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE)
     photo = models.CharField(max_length=100)
-    status = models.CharField(max_length=20)
+    status = models.CharField(max_length=20, choices=STATUS_BIKE_CHOICES)
     def __str__(self):
         return str(self.bike_model_id)
 
@@ -38,7 +55,7 @@ class Bike(models.Model):
 class Bike_rent(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     bike_id = models.ForeignKey(Bike, on_delete=models.CASCADE)
-    status = models.CharField(max_length=20)
+    status = models.CharField(max_length=20, choices=STATUS_RENT_CHOICES)
     start = models.DateTimeField()
     end = models.DateTimeField()
     region =  models.CharField(max_length=40)

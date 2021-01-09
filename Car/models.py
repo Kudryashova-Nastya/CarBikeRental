@@ -6,6 +6,23 @@ from General.models import Delivery
 
 # Create your models here.
 
+STATUS_RENT_CHOICES = [
+    ('за', 'Заказано'),
+    ('оп', 'Оплачено'),
+    ('во', 'Возврат средств'),
+    ('дз', 'На доставке заказчику'),
+    ('ак', 'Активно'),
+    ('дл', 'На доставке в локацию'),
+    ('вы', 'Выполнено'),
+    ('от', 'Отменено'),
+    ('шт', 'Ожидание оплаты штрафа')
+]
+
+STATUS_CAR_CHOICES = [
+    ('ре', 'В ремонте'),
+    ('св', 'Свободна'),
+    ('ар', 'Арендована')
+]
 class Car_model(models.Model):
     name = models.CharField(max_length=100)
     gearbox = models.CharField(max_length=15)
@@ -32,7 +49,7 @@ class Car(models.Model):
     color = models.CharField(max_length=20)
     number = models.CharField(max_length=10)
     photo = models.CharField(max_length=100)
-    status = models.CharField(max_length=20)
+    status = models.CharField(max_length=20, choices=STATUS_CAR_CHOICES)
     def __str__(self):
         return self.number or ''
 
@@ -40,7 +57,7 @@ class Car(models.Model):
 class Car_rent(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     car_id = models.ForeignKey(Car, on_delete=models.CASCADE)
-    status = models.CharField(max_length=20)
+    status = models.CharField(max_length=20, choices=STATUS_RENT_CHOICES)
     start = models.DateTimeField()
     end = models.DateTimeField()
     region =  models.CharField(max_length=40)
