@@ -22,6 +22,12 @@ class BikeAdmin(ImportExportActionModelAdmin):
     search_fields = ('id', 'year', 'brand')
     list_editable = ('status',)
     actions = [send_for_repair, 'export_admin_action']
+    def bike_model_id(self, obj):
+        url = (
+            reverse("admin:bike_bike_model_changelist")
+        )
+        return format_html('<a href="{}">Model</a>', url)
+    bike_model_id.short_description = "bike_model"
 
 class Bike_rentAdmin(ImportExportActionModelAdmin):
     list_display = ('id', 'user_id', 'bike_id', 'status', 'start', 'end', 'region', 'delivery_to_id', 'delivery_from_id', 'limit', 'price')

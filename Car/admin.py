@@ -37,7 +37,7 @@ class CarAdmin(ImportExportActionModelAdmin):
             # + "?"
             # + urlencode({"car_model__id": f"{obj.id}"})
         )
-        return format_html('<a href="{}">Students</a>', url)
+        return format_html('<a href="{}">Model</a>', url)
     car_model_id.short_description = "car_model"
     
     # def car_model_id(self, item):
