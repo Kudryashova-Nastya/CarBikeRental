@@ -34,8 +34,8 @@ class CarAdmin(ImportExportActionModelAdmin):
     def car_model_id(self, obj):
         url = (
             reverse("admin:car_car_model_changelist")
-            # + "?"
-            # + urlencode({"car_model__id": f"{obj.id}"})
+            + "?"
+            + urlencode({"car_model_id": f"{obj.id}"})
         )
         return format_html('<a href="{}">Model</a>', url)
     car_model_id.short_description = "car_model"

@@ -25,6 +25,8 @@ class BikeAdmin(ImportExportActionModelAdmin):
     def bike_model_id(self, obj):
         url = (
             reverse("admin:bike_bike_model_changelist")
+            + "?"
+            + urlencode({"bike_model_id": f"{obj.id}"})
         )
         return format_html('<a href="{}">Model</a>', url)
     bike_model_id.short_description = "bike_model"
